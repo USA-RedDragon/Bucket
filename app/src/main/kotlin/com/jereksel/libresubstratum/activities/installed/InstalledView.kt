@@ -1,5 +1,7 @@
 package com.jereksel.libresubstratum.activities.installed
 
+import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.design.widget.Snackbar
@@ -23,20 +25,31 @@ import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
 import javax.inject.Inject
 import android.support.v4.view.MenuItemCompat
 import android.support.v7.widget.SearchView
+import com.github.salomonbrys.kodein.LazyKodein
+import com.github.salomonbrys.kodein.LazyKodeinAware
+import com.github.salomonbrys.kodein.android.androidActivityScope
+import com.github.salomonbrys.kodein.android.appKodein
+import com.github.salomonbrys.kodein.instance
+import com.github.salomonbrys.kodein.provider
 
 
-open class InstalledView : AppCompatActivity(), View, SearchView.OnQueryTextListener {
+open class InstalledView : AppCompatActivity(), View, SearchView.OnQueryTextListener, LazyKodeinAware {
 
-    @Inject lateinit var presenter: Presenter
+    override val kodein: LazyKodein = LazyKodein(appKodein)
+
+//    @Inject lateinit var presenter: Presenter
+    val presenter: Presenter by instance()
+
     val mLayoutManager by lazy { LinearLayoutManager(this@InstalledView) }
+
     var layoutState: Parcelable? = null
     var adapter: InstalledOverlaysAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_installed)
-        (application as App).getAppComponent(this).inject(this)
-        presenter = (lastCustomNonConfigurationInstance ?: presenter) as Presenter
+//        (application as App).getAppComponent(this).inject(this)
+//        presenter = (lastCustomNonConfigurationInstance ?: presenter) as Presenter
         presenter.setView(this)
         presenter.getInstalledOverlays()
         fab_uninstall.setOnClickListener { fab.close(true); presenter.uninstallSelected() }

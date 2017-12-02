@@ -8,6 +8,7 @@ buildscript {
         aa_version = "4.3.1"
         dagger_version = "2.10"
         room_version = "1.0.0-beta2"
+        kodein_version = "4.1.0"
         assertj_version = "3.8.0"
         assertj_android_version = "1.2.0"
         slf4j_version = "1.7.25"
@@ -44,6 +45,10 @@ buildscript {
 
         dagger = "com.google.dagger:dagger:$dagger_version"
         daggerCompiler = "com.google.dagger:dagger-compiler:$dagger_version"
+
+        kodein = "com.github.salomonbrys.kodein:kodein:$kodein_version"
+        kodeinCore = "com.github.salomonbrys.kodein:kodein-core:$kodein_version"
+        kodeinAndroid = "com.github.salomonbrys.kodein:kodein-android:$kodein_version"
 
         guava = "com.google.guava:guava:$guava_version"
 

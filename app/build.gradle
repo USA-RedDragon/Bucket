@@ -235,6 +235,13 @@ dependencies {
     kapt daggerCompiler
     testCompile group: 'javax.inject', name: 'javax.inject', version: '1'
 
+    //Kodein
+    compile kodein
+    compile kodeinCore
+    compile kodeinAndroid
+
+    compile "android.arch.lifecycle:extensions:1.0.0"
+
     //Kotterknife
     compile 'com.jakewharton:kotterknife:0.1.0-20170921.134610-22', {
         exclude group: 'com.android.support', module: 'support-v4'

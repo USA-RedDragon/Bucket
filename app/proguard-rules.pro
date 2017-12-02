@@ -23,6 +23,7 @@
 -keep class ch.qos.** { *; }
 -keep class org.slf4j.** { *; }
 -keepattributes *Annotation*
+-keepattributes Signature
 -dontwarn ch.qos.logback.core.net.*
 
 -keep class com.allogy.android.logback.CrashlyticsAppender { *; }
