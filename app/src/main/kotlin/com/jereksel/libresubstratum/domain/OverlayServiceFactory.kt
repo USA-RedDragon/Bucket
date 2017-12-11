@@ -25,6 +25,7 @@ import android.os.Build.VERSION.SDK_INT
 import android.os.Build.VERSION_CODES.N
 import android.os.Build.VERSION_CODES.N_MR1
 import android.provider.Settings
+import com.jereksel.libresubstratum.domain.overlayService.nougat.SamsungOverlayService
 import com.jereksel.libresubstratum.domain.overlayService.nougat.WDUCommitsOverlayService
 import com.jereksel.libresubstratum.domain.overlayService.nougat.WODUCommitsOverlayService
 import com.jereksel.libresubstratum.extensions.getLogger
@@ -36,6 +37,10 @@ object OverlayServiceFactory {
     fun getOverlayService(context: Context): OverlayService {
 
         val supportedAndroidVersions = listOf(N, N_MR1)
+
+        if (android.os.Build.MANUFACTURER.contentEquals("samsung")) {
+            return SamsungOverlayService(context)
+        }
 
         if (!supportedAndroidVersions.contains(SDK_INT)) {
             log.error("Not supported android version: {} {}", SDK_INT, RELEASE)
